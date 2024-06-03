@@ -36,7 +36,8 @@ export default {
             *Atenção: consideramos que você tem em casa sal, pimenta e água.
         </p>
 
-        <BotaoPrincipal texto="Buscar receitas!" @click="$emit('buscarReceitas')" />
+        <BotaoPrincipal texto="Buscar receitas!" 
+        @click="$emit('buscarReceitas')" />
     </section>
 </template>
 

@@ -6,7 +6,6 @@ export default {
 }
 </script>
 
-
 <template>
     <button class="paragrafo-lg botao-principal">
         {{ texto }}
