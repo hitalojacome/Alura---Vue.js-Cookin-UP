@@ -1,10 +1,15 @@
 <script lang="ts">
+import type { PropType } from 'vue';
 import { obterReceitas } from '@/http/index';
+import { itensDeLista1EstaoEmLista2 } from '@/operacoes/listas';
 import type IReceita from "@/interfaces/IReceita";
 import CardReceita from './CardReceita.vue';
 import BotaoPrincipal from './BotaoPrincipal.vue';
 
 export default {
+  props: {
+    ingredientes: { type: Array as PropType<string[]>, required: true }
+  },
   data() {
     return {
       receitasEncontradas: [] as IReceita[]
@@ -13,7 +18,11 @@ export default {
   async created() {
     const receitas = await obterReceitas();
 
-    this.receitasEncontradas = receitas.slice(0, 8);
+    this.receitasEncontradas = receitas.filter((receita) => {
+      const possoFazerReceita = itensDeLista1EstaoEmLista2(receita.ingredientes, this.ingredientes);
+
+      return possoFazerReceita
+    })
   },
   components: { BotaoPrincipal, CardReceita },
   emits: ['editarReceitas']
@@ -24,7 +33,9 @@ export default {
   <section class="mostrar-receitas">
     <h1 class="cabecalho titulo-receitas">Receitas</h1>
 
-    <p class="paragrafo-lg resultados-encontrados">Resultados encontrados: {{ receitasEncontradas.length }}</p>
+    <p class="paragrafo-lg resultados-encontrados">
+      Resultados encontrados: {{ receitasEncontradas.length }}
+    </p>
 
     <div v-if="receitasEncontradas.length" class="receitas-wrapper">
       <p class="paragrafo-lg informacoes">
