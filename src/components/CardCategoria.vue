@@ -12,7 +12,7 @@ export default {
         }
     },
     components: { Tag, IngredienteSelecionavel },
-    emits: ['adicionarIngrediente']
+    emits: ['adicionarIngrediente', 'removerIngrediente']
 }
 </script>
 
