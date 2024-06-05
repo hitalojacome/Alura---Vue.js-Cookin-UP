@@ -24,7 +24,7 @@ export default {
             <h2 class="paragrafo-lg categoria__nome">{{ categoria.nome }}</h2>
         </header>
 
-        <ul class="categoria__ingredientes">
+        <ul class="categoria__ingredientes"> 
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
                 <IngredienteSelecionavel :ingrediente="ingrediente" @adicionar-ingrediente="$emit('adicionarIngrediente', $event)" @remover-ingrediente="$emit('removerIngrediente', $event)" />
             </li>
